@@ -8,17 +8,18 @@ const {
 
 // GET route for retrieving all notes from db.
 notes.get('/', (req, res) => {
-    readFromFile('./db/notes.json')
-        .then((data) => res.json(JSON.parse(data)));
+    readFromFile('./db/notes.json').then((data) => res.json(JSON.parse(data)));
 });
 
 notes.post('/', (req, res) => {
-    const { noteTitle, noteText } = req.body;
+    console.log(req.body);
 
-    if (noteTitle && noteText) {
+    const { title, text } = req.body;
+
+    if (req.body) {
         const newNote = {
-            noteTitle,
-            noteText,
+            title,
+            text,
             // note_id: uuidv4(),
         };
 
@@ -31,7 +32,7 @@ notes.post('/', (req, res) => {
 
         res.json(response);
     } else {
-        res.json('Error in posting note.');
+        res.error('Error in posting note.');
     }
 });
 
