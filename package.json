@@ -1,7 +1,7 @@
 {
   "name": "note-factory",
   "version": "1.0.0",
-  "description": "",
+  "description": "Application to write and save notes using an Express.js backend that retrieves data input from JSON files.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

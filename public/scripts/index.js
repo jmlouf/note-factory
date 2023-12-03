@@ -55,15 +55,15 @@ const saveNote = (note) =>
             console.error('Error:', error);
         });
 
-const deleteNote = (noteId) =>
-    fetch(`/api/notes/${noteId}`, {
+const deleteNote = (note_id) =>
+    fetch(`/api/notes/${note_id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     })
         .then((response) => response.json())
-        .then((updatedNotes) => handleNoteDelete(updatedNotes))
+        .then((updatedNotes) => renderNoteList(updatedNotes))
         .catch((error) => {
             console.error('Error:', error);
         });
@@ -73,7 +73,7 @@ const renderActiveNote = () => {
     hide(saveNoteBtn);
     hide(clearBtn);
 
-    if (activeNote.id) {
+    if (activeNote.note_id) {
         show(newNoteBtn);
         noteTitle.setAttribute('readonly', true);
         noteText.setAttribute('readonly', true);
@@ -105,9 +105,9 @@ const handleNoteDelete = (e) => {
     e.stopPropagation();
 
     const note = e.target;
-    const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+    const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).note_id;
 
-    if (note.id === noteId) {
+    if (activeNote.note_id === noteId) {
         activeNote = {};
     }
 
@@ -119,12 +119,13 @@ const handleNoteDelete = (e) => {
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
+    e.preventDefault();
     activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
     renderActiveNote();
 };
 
 // Sets the activeNote to an empty object and allows the user to enter a new note
-const handleNewNoteView = () => {
+const handleNewNoteView = (e) => {
     activeNote = {};
     show(clearBtn);
     renderActiveNote();
@@ -177,6 +178,9 @@ const renderNoteList = async (notes) => {
             liEl.append(delBtnEl);
         }
 
+        // Log the value of delBtn
+        console.log(`createLi called with text: ${text}, delBtn: ${delBtn}`);
+
         return liEl;
     };
 
@@ -204,6 +208,6 @@ if (window.location.pathname === '/notes') {
     newNoteBtn.addEventListener('click', handleNewNoteView);
     clearBtn.addEventListener('click', renderActiveNote);
     noteForm.addEventListener('input', handleRenderBtns);
-}
+};
 
 getAndRenderNotes();
