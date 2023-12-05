@@ -36,7 +36,6 @@ const getNotes = () =>
             'Content-Type': 'application/json'
         }
     })
-        .then((data) => data)
         .catch((error) => {
             console.error('Error:', error);
         });
@@ -49,8 +48,6 @@ const saveNote = (note) =>
         },
         body: JSON.stringify(note)
     })
-        .then((response) => response.json())
-        .then((newNote) => getAndRenderNotes(newNote))
         .catch((error) => {
             console.error('Error:', error);
         });
@@ -62,12 +59,9 @@ const deleteNote = (note_id) =>
             'Content-Type': 'application/json'
         }
     })
-        .then((response) => response.json())
-        .then((updatedNotes) => renderNoteList(updatedNotes))
         .catch((error) => {
             console.error('Error:', error);
         });
-
 
 const renderActiveNote = () => {
     hide(saveNoteBtn);
@@ -177,9 +171,6 @@ const renderNoteList = async (notes) => {
 
             liEl.append(delBtnEl);
         }
-
-        // Log the value of delBtn
-        console.log(`createLi called with text: ${text}, delBtn: ${delBtn}`);
 
         return liEl;
     };
