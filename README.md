@@ -12,6 +12,7 @@ This project demonstrates a straight-forward yet fully capable note taking web a
 ## Table of Contents
 
 - [Usage](#usage)
+- [Deployment Link](#deployment-link)
 - [Credits](#credits)
 - [Questions](#questions)
 - [License](#license)
