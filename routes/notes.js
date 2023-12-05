@@ -19,7 +19,7 @@ notes.get('/:note_id', (req, res) => {
         .then((data) => JSON.parse(data))
         .then((json) => {
             const resultNote = json.filter((note) => note.note_id === noteId);
-            return resultNote.length > 0
+            return resultNote
                 ? res.json(resultNote)
                 : res.json('No notes with that ID.');
         })
@@ -37,10 +37,10 @@ notes.delete('/:note_id', (req, res) => {
 
             // Save that array to the filesystem.
             writeToFile('./db/notes.json', updatedNotes);
-
-            // Respond to the DELETE request.
-            res.json(`${noteId} has been deleted.`);
-        });
+            return updatedNotes
+                ? res.json(updatedNotes)
+                : res.json('Could not update notes.');
+        })
 });
 
 notes.post('/', (req, res) => {
