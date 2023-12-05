@@ -38,6 +38,10 @@ The following images demonstrate the application's appearance and functionality:
 ![Mockup 2](./public/assets/images/mockup-2.png)
 ![Mockup 3](./public/assets/images/mockup-3.png)
 
+## Deployment Link
+
+https://note-factory-ce0b9e01599c.herokuapp.com/
+
 ## Credits
 
 This project was created for educational purposes as part of the KU Coding Bootcamp curriculum.
